@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Una sorpresa para mi Mejor Amiga! 💖</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 40px 30px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(255, 75, 110, 0.15);
+            text-align: center;
+            border: 2px solid #ffb3c6;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff477e;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #6c757d;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff477e, #ff7096);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.3);
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 71, 126, 0.4);
+        }
+
+        #btnNo {
+            background: #adb5bd;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .memories-list {
+            text-align: left;
+            background: #fff5f7;
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 5px solid #ff477e;
+            margin-bottom: 25px;
+        }
+
+        .memories-list li {
+            margin-bottom: 10px;
+            color: #495057;
+            list-style: none;
+            font-size: 1rem;
+        }
+
+        .memories-list li::before {
+            content: "✨ ";
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        
+        <!-- PANTALLA 1: Escáner inicial -->
+        <div id="screen1" class="screen active">
+            <h1>🔍 Escáner de Amistad Avanzado</h1>
+            <p>Holaaa. He programado este sistema para comprobar científicamente si realmente eres mi mejor amiga o solo me estás robando mis papitas. ¿Lista para probar?</p>
+            <button class="btn" onclick="nextScreen(2)">¡Obvio que sí! 🚀</button>
+        </div>
+
+        <!-- PANTALLA 2: Pregunta trampa -->
+        <div id="screen2" class="screen">
+            <h1>🤔 Pregunta de seguridad:</h1>
+            <p>¿Soy la persona más divertida, increíble y genial que conoces en este planeta?</p>
+            <button class="btn" onclick="celebrateSurprise()">¡Sí, eres lo máximo! 💖</button>
+            <button class="btn" id="btnNo" onmouseover="escaparBotón()" onclick="escaparBotón()">Nop... 😜</button>
+        </div>
+
+        <!-- PANTALLA 3: Revelación final limpia -->
+        <div id="screen3" class="screen">
+            <h1>🎉 ¡Sorpresa! Te Quiero Muchísimo 🎉</h1>
+            
+            <!-- BOTÓN MÁGICO DE MÚSICA SIN INTERNET -->
+            <div style="margin: 20px auto; width: 100%; max-width: 280px;">
+                <button class="btn" id="musicBtn" onclick="toggleMúsica()" style="background: linear-gradient(45deg, #6c5ce7, #a29bfe); font-size: 1rem; padding: 10px; box-shadow: none;">
+                    🎵 Activar melodía de la amistad
+                </button>
+            </div>
+
+            <p>¡No había ningún escáner real! Solo quería recordarte lo afortunada/o que me siento de tenerte en mi vida.</p>
+            
+            <ul class="memories-list">
+                <li>Por todas las risas infinitas compartidas.</li>
+                <li>Por aguantar mis dramas cotidianos sin quejarte.</li>
+                <li>Por estar en los días buenos y en los no tan buenos.</li>
+                <li>Por ser la mejor cómplice que alguien podría pedir.</li>
+            </ul>
+
+            <p style="font-weight: bold; color: #ff477e; font-size: 1.2rem; margin-bottom: 20px;">¡Gracias por ser la mejor amiga del universo! 👭✨</p>
+            <button class="btn" onclick="lanzarMasConfeti()">¡Más confeti! 🎊</button>
+        </div>
+
+    </div>
+
+    <script>
+        function nextScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen' + screenNum).classList.add('active');
+        }
+
+        function escaparBotón() {
+            const btnNo = document.getElementById('btnNo');
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
+            btnNo.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function celebrateSurprise() {
+            nextScreen(3);
+            lanzarMasConfeti();
+        }
+
+        function lanzarMasConfeti() {
+            const emojis = ['🎉', '✨', '💖', '👭', '🌸', '💝'];
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.position = 'fixed';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = '100vh';
+                particle.style.fontSize = Math.random() * 20 + 20 + 'px';
+                particle.style.zIndex = '9999';
+                particle.style.pointerEvents = 'none';
+                particle.style.transition = 'all ' + (Math.random() * 2 + 1) + 's ease-out';
+                
+                document.body.appendChild(particle);
+
+                setTimeout(() => {
+                    particle.style.transform = 'translate(' + (Math.random() * 200 - 100) + 'px, -110vh) rotate(' + (Math.random() * 360) + 'deg)';
+                    particle.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => { particle.remove(); }, 3000);
+            }
+        }
+
+        // Motor de audio nativo por código
+        let audioCtx = null;
+        let isPlaying = false;
+        let musicInterval = null;
+
+        function toggleMúsica() {
+            const btn = document.getElementById('musicBtn');
+            
+            if (isPlaying) {
+                clearInterval(musicInterval);
+                btn.innerText = "🎵 Activar melodía de la amistad";
+                btn.style.background = "linear-gradient(45deg, #6c5ce7, #a29bfe)";
+                isPlaying = false;
+                return;
+            }
+
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            btn.innerText = "⏸️ Pausar melodía";
+            btn.style.background = "linear-gradient(45deg, #e17055, #fab1a0)";
+            isPlaying = true;
+
+            // Notas de "A Thousand Years" adaptadas a código puro
+            const notas = [146.83, 220.00, 293.66, 329.63, 293.66, 220.00, 164.81, 220.00, 329.63, 349.23, 329.63, 220.00]; 
+            let index = 0;
+
+            musicInterval = setInterval(() => {
+                if (!isPlaying) return;
+                
+                let osc = audioCtx.createOscillator();
+                let gainNode = audioCtx.createGain();
+                
+                osc.type = 'sine'; 
+                osc.frequency.setValueAtTime(notas[index % notas.length], audioCtx.currentTime);
+                
+                gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime); 
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.9);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.9);
+                
+                index++;
+            }, 500); 
+        }
+    </script>
+</body>
+</html>
